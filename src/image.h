@@ -18,7 +18,19 @@ struct ImageRgb8 {
   #undef E
 };
 
-int create_image_rgb8(struct ImageRgb8 *);
-void destroy_image_rgb8(struct ImageRgb8 *);
+int create_image(struct ImageRgb8 *);
+void destroy_image(struct ImageRgb8 *);
+
+int image_copy(struct ImageRgb8 const *src, struct ImageRgb8 *dst);
+
+void image_rgb_to_bgr(struct ImageRgb8 *);
+void image_bgr_to_rgb(struct ImageRgb8 *);
+
+int image_transpose(struct ImageRgb8 const *src, struct ImageRgb8 *dst);
+void image_mirror_h(struct ImageRgb8 *);
+void image_mirror_v(struct ImageRgb8 *);
+
+int image_rotate_clockwise(struct ImageRgb8 const *src, struct ImageRgb8 *dst);
+int image_rotate_counter_clockwise(struct ImageRgb8 const *src, struct ImageRgb8 *dst);
 
 #endif

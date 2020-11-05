@@ -36,9 +36,8 @@ struct BitmapHeader {
 
 enum BmpLoadResult from_bmp(struct ImageRgb8 *img, FILE *f) {
   struct BitmapHeader header;
-  char buf[1024];
-  size_t col;
-  size_t additional_bytes_per_row;
+  char buf[256];
+  size_t col, additional_bytes_per_row;
 #define E(t, n)                                                                \
   fread(&header.n, sizeof(t), 1, f);                                           \
   sprintf(buf, #n ": %d", header.n);                                           \
@@ -73,7 +72,7 @@ enum BmpLoadResult from_bmp(struct ImageRgb8 *img, FILE *f) {
 
   img->width = header.biWidth;
   img->height = header.biHeight;
-  if (create_image_rgb8(img)) {
+  if (create_image(img)) {
     log_err("Could not allocate memory for the image");
     return BMP_LOAD_MEMORY_ERROR;
   }
@@ -97,10 +96,7 @@ enum BmpLoadResult from_bmp(struct ImageRgb8 *img, FILE *f) {
 
 enum BmpSaveResult to_bmp(struct ImageRgb8 const *img, FILE *f) {
   struct BitmapHeader header;
-  size_t additional_bytes_per_row;
-  size_t bytes_per_row;
-  size_t col;
-  size_t header_size;
+  size_t additional_bytes_per_row, bytes_per_row, col, header_size;
   char garbage[4] = "abc";
   char buf[256];
 
