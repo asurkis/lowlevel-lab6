@@ -100,3 +100,9 @@ int image_rotate_counter_clockwise(struct ImageRgb8 const *src,
   image_mirror_v(dst);
   return 0;
 }
+
+void image_rotate_180(struct ImageRgb8 *img) {
+  /* Оптимизировать можно, но асимптотика не поменяется */
+  image_mirror_h(img);
+  image_mirror_v(img);
+}

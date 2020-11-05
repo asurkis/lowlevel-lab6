@@ -32,5 +32,6 @@ void image_mirror_v(struct ImageRgb8 *);
 
 int image_rotate_clockwise(struct ImageRgb8 const *src, struct ImageRgb8 *dst);
 int image_rotate_counter_clockwise(struct ImageRgb8 const *src, struct ImageRgb8 *dst);
+void image_rotate_180(struct ImageRgb8 *);
 
 #endif
